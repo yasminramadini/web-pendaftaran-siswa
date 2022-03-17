@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;500&display=swap');
+
+:root {
+  --blue: #008AFF;
+}
+
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Fredoka', Sans-Serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: var(--blue);
+}
+
+a {
+  color: var(--blue);
+}
+
+p, .container li, td {
+  font-weight: 200;
+}
+
+footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'index');
+Route::view('/form-daftar', 'form-daftar')->name('form-daftar');
+
+Route::prefix('admin')->group(function() {
+  Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
+  Route::view('/pengaturan', 'admin.pengaturan')->name('admin.pengaturan');
 });

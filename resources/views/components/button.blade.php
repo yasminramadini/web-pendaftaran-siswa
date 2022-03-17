@@ -1,0 +1,1 @@
+<button class="btn" style="background: {{ $background }}; color: {{ $color }}">{{ $message }}</button>
