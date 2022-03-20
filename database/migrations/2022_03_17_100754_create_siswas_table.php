@@ -20,10 +20,12 @@ class CreateSiswasTable extends Migration
             $table->string('asal_sekolah');
             $table->string('jenis_kelamin');
             $table->string('agama');
-            $table->string('nisn');
+            $table->string('nik');
             $table->string('telepon');
+            $table->string('email')->nullable();
             $table->text('alamat');
             $table->boolean('diterima')->default(false);
+            $table->string('foto');
             $table->timestamps();
         });
     }

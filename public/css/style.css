@@ -22,7 +22,7 @@ a {
   color: var(--blue);
 }
 
-p, .container li, td {
+p, .container li {
   font-weight: 200;
 }
 

@@ -6,13 +6,11 @@ use Illuminate\View\Component;
 
 class Button extends Component
 {
-    public $message;
     public $background;
     public $color;
     
-    public function __construct($message, $background, $color)
+    public function __construct($background, $color)
     {
-        $this->message = $message;
         $this->background = $background;
         $this->color = $color;
     }

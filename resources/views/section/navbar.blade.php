@@ -33,7 +33,7 @@
             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan</a>
+            <a class="nav-link" href="{{ route('pengaturan.index') }}">Pengaturan</a>
           </li>
         </ul>
       </div>

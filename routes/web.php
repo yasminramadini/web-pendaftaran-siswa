@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PengaturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'index');
-Route::view('/form-daftar', 'form-daftar')->name('form-daftar');
+Route::view('/form-daftar', 'formDaftar')->name('form-daftar');
 
 Route::prefix('admin')->group(function() {
-  Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
-  Route::view('/pengaturan', 'admin.pengaturan')->name('admin.pengaturan');
+  Route::get('/dashboard', [SiswaController::class, 'index'])->name('admin.dashboard');
+  
+  Route::get('/pengaturan/edit-visi', [PengaturanController::class, 'editVisi'])->name('pengaturan.edit-visi');
+  Route::put('/pengaturan/update-visi', [PengaturanController::class, 'updateVisi'])->name('pengaturan.update-visi');
+    
+  Route::get('/pengaturan/edit-misi', [PengaturanController::class, 'editMisi'])->name('pengaturan.edit-misi');
+  Route::put('/pengaturan/update-misi', [PengaturanController::class, 'updateMisi'])->name('pengaturan.update-misi');
+  
+  Route::resource('/pengaturan', PengaturanController::class);
+  
+  Route::resource('/siswa', SiswaController::class);
 });
