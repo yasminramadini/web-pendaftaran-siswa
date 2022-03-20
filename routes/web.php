@@ -27,6 +27,9 @@ Route::prefix('admin')->group(function() {
   Route::get('/pengaturan/edit-misi', [PengaturanController::class, 'editMisi'])->name('pengaturan.edit-misi');
   Route::put('/pengaturan/update-misi', [PengaturanController::class, 'updateMisi'])->name('pengaturan.update-misi');
   
+  Route::get('/pengaturan/edit-fasilitas', [PengaturanController::class, 'editFasilitas'])->name('pengaturan.edit-fasilitas');
+  Route::put('/pengaturan/update-fasilitas', [PengaturanController::class, 'updateFasilitas'])->name('pengaturan.update-fasilitas');
+  
   Route::resource('/pengaturan', PengaturanController::class);
   
   Route::resource('/siswa', SiswaController::class);

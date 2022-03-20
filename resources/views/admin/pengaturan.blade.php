@@ -75,6 +75,14 @@
         <a href="{{ route('pengaturan.edit-misi') }}" class="text-decoration-none my-3">Edit misi</a>
       </div>
       <button type="button" class="btn mb-4 d-block" style="background: #1FC600; color: #fff;" onclick="tambahMisi()"><i class="fas fa-plus-circle"></i> Tambah misi</button>
+      <div class="my-3" id="fasilitas">
+        <label>Fasilitas</label>
+        @foreach($pengaturan->fasilitas as $f)
+        <input type="text" name="fasilitas[]" class="form-control mb-2" value="{{ $f }}">
+        @endforeach
+        <a href="{{ route('pengaturan.edit-fasilitas') }}" class="text-decoration-none my-3">Edit fasilitas</a>
+      </div>
+      <button type="button" class="btn mb-4 d-block" style="background: #1FC600; color: #fff;" onclick="tambahFasilitas()"><i class="fas fa-plus-circle"></i> Tambah fasilitas</button>
       <x-button message="Simpan" background="#008AFF" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
     </form>
     

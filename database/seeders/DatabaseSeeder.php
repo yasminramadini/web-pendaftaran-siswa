@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
           'visi' => 'Mewujudkan pendidikan untuk menghasilkan prestasi dan lulusa berkwalitas tinggi yang peduli dengan lingkungan hidup.|Mewujudkan sumber daya manusia yang beriman, produktif, kreatif, inofatif dan efektif.|Mewujudkan pengembangan inovasi pembelajaran sesuai tuntutan.',
           'misi' => 'Memantapkan penghayatan dan pengamalan ajaran agama.|Melaksanakan kurikulum berwawasan lingkungan dengan berlandaskan budaya nasional dan kearifan lokal.|Melaksanakan peningkatan kualitas sumber daya manusia yang berkarakter dan mandiri.',
           'logo' => 'logo-sekolah.png',
-          'tema' => '#008AFF'
+          'tema' => '#008AFF',
+          'fasilitas' => '27 ruang kelas.|2 lab komputer.|Kolam renang, lapangan basket, lapangan futsal.|Ruang teater.|Studio rekaman dan foto.'
         ]);
     }
 }

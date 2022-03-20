@@ -60,6 +60,37 @@ function tambahVisi() {
   visi.appendChild(visiWrapper)
 }
 
+function tambahFasilitas() {
+  const fasilitas = document.querySelector("#fasilitas")
+  const fasilitasWrapper = document.createElement("div")
+  const input = document.createElement("input")
+  const tombolHapus = document.createElement("button")
+  
+  //buat inputan
+  input.classList.add("form-control")
+  input.setAttribute("name", "fasilitas[]")
+  input.setAttribute("required", "")
+  
+  //buat tombol hapus inputan
+  tombolHapus.classList.add("btn", "btn-danger")
+  tombolHapus.innerHTML = '<i class="fas fa-ban"></i>'
+  tombolHapus.setAttribute("type", "button")
+  tombolHapus.addEventListener("click", function() {
+    hapusFasilitas(this.parentElement)
+  })
+  
+  fasilitasWrapper.classList.add("input-group")
+  fasilitasWrapper.appendChild(input)
+  fasilitasWrapper.appendChild(tombolHapus)
+  fasilitasWrapper.classList.add("mb-3")
+  
+  fasilitas.appendChild(fasilitasWrapper)
+}
+
+function hapusFasilitas(elem) {
+  elem.remove()
+}
+
 function hapusMisi(elem) {
   elem.remove()
 }

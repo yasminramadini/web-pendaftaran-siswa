@@ -13,6 +13,7 @@ class PengaturanController extends Controller
         $pengaturan = Pengaturan::first();
         $pengaturan->misi = explode('|', $pengaturan->misi);
         $pengaturan->visi = explode('|', $pengaturan->visi);
+        $pengaturan->fasilitas = explode('|', $pengaturan->fasilitas);
         
         return view('admin.pengaturan', ["pengaturan" => $pengaturan]);
     }
@@ -70,6 +71,14 @@ class PengaturanController extends Controller
         return view('admin.editMisi', ['misi' => $misi]);
     }
     
+    public function editFasilitas()
+    {
+        $pengaturan = Pengaturan::first();
+        $fasilitas = explode('|', $pengaturan->fasilitas);
+        
+        return view('admin.editFasilitas', ['fasilitas' => $fasilitas]);
+    }
+    
     public function updateVisi(Request $request)
     {
         $pengaturan = Pengaturan::first();
@@ -92,5 +101,17 @@ class PengaturanController extends Controller
         $pengaturan->save();
         
         return redirect()->to('/admin/pengaturan')->with('msg', 'Misi sekolah berhasil diperbarui');
+    }
+    
+    public function updateFasilitas(Request $request)
+    {
+        $pengaturan = Pengaturan::first();
+        
+        //gabungkan array fasilitas jadi string
+        $fasilitas = implode('|', $request->fasilitas);
+        $pengaturan->fasilitas = $fasilitas;
+        $pengaturan->save();
+        
+        return redirect()->to('/admin/pengaturan')->with('msg', 'Fasilitas sekolah berhasil diperbarui');
     }
 }
