@@ -4,7 +4,7 @@
 
 <div class="row justify-content-center">
   <div class="col-lg-6">
-    <h1 class="text-center">Form Pendaftaran Siswa Baru Gelombang 1 SMP Laravel TP 2022/2023</h1>
+    <h1 class="text-center">Form Pendaftaran Siswa Baru {{ $pengaturan->nama_sekolah }} TP {{ date('Y') }}/{{ date('Y', strtotime('+1 years')) }}</h1>
     <hr>
     
     @if(session('msg'))

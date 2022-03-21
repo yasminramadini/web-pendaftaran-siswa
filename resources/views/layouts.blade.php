@@ -18,7 +18,7 @@
   </head>
   <body>
     
-    @include('section.navbar')
+    @include('section.navbar', ['pengaturan' => App\Models\Pengaturan::select('nama_sekolah', 'logo', 'tema')->first()])
      
      <div class="container" style="margin: 100px 0;">
        @yield('content')
@@ -31,6 +31,6 @@
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
     
-    @include('section.footer')
+    @include('section.footer', ['pengaturan' => App\Models\Pengaturan::select('nama_sekolah')->first()])
   </body>
 </html>

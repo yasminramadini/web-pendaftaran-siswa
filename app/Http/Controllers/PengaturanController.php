@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaturan;
+use App\Models\Pendaftaran;
 use App\Http\Requests\PengaturanRequest;
 
 class PengaturanController extends Controller
 {
     public function index()
     {
+        //pecah string menjadi array
         $pengaturan = Pengaturan::first();
         $pengaturan->misi = explode('|', $pengaturan->misi);
         $pengaturan->visi = explode('|', $pengaturan->visi);
@@ -26,16 +28,31 @@ class PengaturanController extends Controller
         //cek apakah user mengupload gambar
         if($request->file('logo')) {
           //generate nama file baru 
-          $namaFile = $request->logo->hashName();
+          $namaLogo = $request->logo->hashName();
           //pindahkan logo ke public
           $storage = "public/logo";
-          $request->logo->storeAs($storage, $namaFile);
+          $request->logo->storeAs($storage, $namaLogo);
           //hapus logo lama 
           if($request->logo_lama !== 'logo-sekolah.png') {
             unlink('./storage/logo/' . $request->logo_lama);
           }
         } else {
-          $namaFile = $request->logo_lama;
+          $namaLogo = $request->logo_lama;
+        }
+        
+        //cek apakah user mengupload banner
+        if($request->file('banner')) {
+          //generate nama file baru 
+          $namaBanner = $request->banner->hashName();
+          //pindahkan banner ke public
+          $storage = "public/logo";
+          $request->banner->storeAs($storage, $namaBanner);
+          //hapus banner lama 
+          if($request->banner_lama !== 'contoh-banner.jpeg') {
+            unlink('./storage/logo/' . $request->banner_lama);
+          }
+        } else {
+          $namaBanner = $request->banner_lama;
         }
         
         //gabungkan array misi dan visi 
@@ -47,9 +64,11 @@ class PengaturanController extends Controller
         $pengaturan->telepon_sekolah = $pengaturan->telepon_sekolah;
         $pengaturan->email_sekolah = $request->email_sekolah;
         $pengaturan->tema = $request->tema;
-        $pengaturan->logo = $namaFile;
+        $pengaturan->logo = $namaLogo;
+        $pengaturan->banner = $namaBanner;
         $pengaturan->visi = $visi;
         $pengaturan->misi = $misi;
+        $pengaturan->tentang_sekolah = $request->tentang_sekolah;
         $pengaturan->save();
         
         return redirect()->to('/admin/pengaturan')->with('msg', 'Pengaturan berhasil diterapkan');

@@ -4,6 +4,10 @@
   --blue: #008AFF;
 }
 
+.navbar {
+  top: -10px;
+}
+
 html, body {
   min-height: 100vh;
 }
@@ -12,10 +16,6 @@ body {
   font-family: 'Fredoka', Sans-Serif;
   display: flex;
   flex-direction: column;
-}
-
-.navbar {
-  background: var(--blue);
 }
 
 a {

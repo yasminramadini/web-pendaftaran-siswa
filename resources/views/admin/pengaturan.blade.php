@@ -16,6 +16,7 @@
       @csrf
       @method('PUT')
       <input type="hidden" name="logo_lama" value="{{ $pengaturan->logo }}">
+      <input type="hidden" name="banner_lama" value="{{ $pengaturan->banner }}">
       <div class="mb-3">
         <label class="mb-1">Ubah Tema</label>
         <input type="color" name="tema" class="form-control @error('tema') is-invalid @enderror" value="{{ $pengaturan->tema }}">
@@ -54,8 +55,16 @@
       <div class="mb-3">
         <label class="mb-1">Logo sekolah</label>
         <input type="file" name="logo" class="form-control mb-2 @error('logo') is-invalid @enderror">
-        <img src="{{ asset('logo/' . $pengaturan->logo) }}" width="150px" class="img-thumbnail" alt="logo lama sekolah">
+        <img src="{{ asset('storage/logo/' . $pengaturan->logo) }}" width="150px" class="img-thumbnail" alt="logo lama sekolah">
         @error('logo')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+      <div class="mb-3">
+        <label class="mb-1">Banner</label>
+        <input type="file" name="banner" class="form-control mb-2 @error('banner') is-invalid @enderror">
+        <img src="{{ asset('storage/logo/' . $pengaturan->banner) }}" width="200px" class="img-thumbnail" alt="banner pendaftaran sekolah">
+        @error('banner')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
@@ -83,34 +92,12 @@
         <a href="{{ route('pengaturan.edit-fasilitas') }}" class="text-decoration-none my-3">Edit fasilitas</a>
       </div>
       <button type="button" class="btn mb-4 d-block" style="background: #1FC600; color: #fff;" onclick="tambahFasilitas()"><i class="fas fa-plus-circle"></i> Tambah fasilitas</button>
+      <div class="mb-3">
+        <label>Tentang sekolah</label>
+        <textarea class="form-control" name="tentang_sekolah" rows="7">{{ $pengaturan->tentang_sekolah }}</textarea>
+      </div>
       <x-button message="Simpan" background="#008AFF" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
     </form>
-    
-    <form class="mt-5">
-      <h3 class="mb-3">Pengaturan Pendaftaran</h3>
-      <div class="mb-3">
-        <label>Gelombang</label>
-        <input type="text" placeholder="Ex: Gelombang 1" name="gelombang" class="form-control">
-      </div>
-      <div class="row mb-3">
-        <div class="col-6">
-          <label>Tanggal Mulai</label>
-          <input type="date" class="form-control" name="tgl_mulai">
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>Biaya</label>
-        <input type="number" name="biaya" class="form-control">
-      </div>
-      <div class="mb-3" id="rincian">
-        <label>Rincian Biaya</label>
-        <input type="text" placeholder="Ex: Seragam batik, olahraga, pramuka, dan muslim" name="rincian[]" class="form-control mb-2">
-        <input type="text" placeholder="Ex: Biaya SPP 1 bulan" name="rincian[]" class="form-control mb-2">
-      </div>
-      <button type="button" class="btn mb-4 d-block" style="background: #1FC600; color: #fff;" onclick="tambahRincian()"><i class="fas fa-plus-circle"></i> Tambah rincian</button>
-      <x-button message="Simpan" background="#008AFF" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
-    </form>
-  </div>
 </div>
-
+</div>
 @endsection

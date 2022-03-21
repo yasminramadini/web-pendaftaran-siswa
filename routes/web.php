@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,8 @@ use App\Http\Controllers\PengaturanController;
 |
 */
 
-Route::view('/', 'index');
-Route::view('/form-daftar', 'formDaftar')->name('form-daftar');
+Route::get('/', [PageController::class, 'index']);
+Route::get('/form-daftar', [PageController::class, 'formDaftar'])->name('form-daftar');
 
 Route::prefix('admin')->group(function() {
   Route::get('/dashboard', [SiswaController::class, 'index'])->name('admin.dashboard');
