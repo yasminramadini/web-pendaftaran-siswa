@@ -27,5 +27,13 @@ class DatabaseSeeder extends Seeder
           'fasilitas' => '27 ruang kelas.|2 lab komputer.|Kolam renang, lapangan basket, lapangan futsal.|Ruang teater.|Studio rekaman dan foto.',
           'tentang_sekolah' => 'SMP Laravel didirikan pada tahun 1990 di Jl. Otto Iskandardinata. Pencetus berdirinya SMP Laravel adalah Bapak Taylor Otwell yang kini juga menjabat sebagai kepala sekolah SMP Laravel. Tak hanya SMP, Yayasan Laravel juga menaungi TK, SD, SMA, SMK, hingga perguruan tinggi. Harapan kami adalah menciptakan siswa/siswi yang berbudi luhur, cerdas, dan mahir dalam teknologi.'
         ]);
+        
+        DB::table('users')->insert([
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            'avatar' => 'https://www.gravatar.com/avatar/' . md5(strtolower(trim('admin@gmail.com'))),
+            'role' => 1
+        ]);
     }
 }

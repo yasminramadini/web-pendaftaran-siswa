@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SiswaRequest;
 use App\Models\Siswa;
 use Carbon\Carbon;
+use AuthTrait;
 
 class SiswaController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize();
         
         return view('admin.dashboard', ['siswa' => Siswa::latest()->get()]);
     }
@@ -44,6 +46,8 @@ class SiswaController extends Controller
 
     public function show($id)
     {
+        $this->authorize();
+        
         $siswa = Siswa::find($id);
         
         //menggabungkan tempat dan tanggal lahir
@@ -64,7 +68,13 @@ class SiswaController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize();
+        
+        $siswa = Siswa::find($id);
+        $siswa->diterima = true;
+        $siswa->save();
+        
+        return redirect()->route('admin.dashboard')->with('msg', 'Siswa telah diterima dan notifikasi email telah dikirim!');
     }
 
     public function destroy($id)

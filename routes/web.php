@@ -5,6 +5,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,13 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'index']);
 Route::get('/form-daftar', [PageController::class, 'formDaftar'])->name('form-daftar');
+Route::resource('/siswa', SiswaController::class);
 
-Route::prefix('admin')->group(function() {
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login/store', [AuthController::class, 'storeLogin'])->name('login.store');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function() {
   Route::get('/dashboard', [SiswaController::class, 'index'])->name('admin.dashboard');
   
   Route::get('/pengaturan/edit-visi', [PengaturanController::class, 'editVisi'])->name('pengaturan.edit-visi');
@@ -33,6 +39,4 @@ Route::prefix('admin')->group(function() {
   Route::put('/pengaturan/update-fasilitas', [PengaturanController::class, 'updateFasilitas'])->name('pengaturan.update-fasilitas');
   
   Route::resource('/pengaturan', PengaturanController::class);
-  
-  Route::resource('/siswa', SiswaController::class);
 });

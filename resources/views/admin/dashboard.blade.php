@@ -6,6 +6,12 @@
     <h1>Daftar Calon Siswa Baru</h1>
     <hr>
     
+    @if(session('msg'))
+    <x-alert type="success">
+      {{ session('msg') }}
+    </x-alert>
+    @endif
+    
     @if(count($siswa) === 0)
     <x-alert type="info">Tidak ada data</x-alert>
     @endif
@@ -37,7 +43,7 @@
             <td>{{ $s->asal_sekolah }}</td>
             <td>
               @if($s->diterima)
-              <span class="badge bg-success">Diteirima</span>
+              <span class="badge bg-success">Diterima</span>
               @else 
               <span class="badge bg-danger">Belum diterima</span>
               @endif
