@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiswaRequest;
 use App\Models\Siswa;
+use App\Models\Pengaturan;
 use Carbon\Carbon;
-use AuthTrait;
+use App\Notifications\SiswaDiterima;
+use App\Notifications\SiswaTidakDiterima;
 
 class SiswaController extends Controller
 {
+    use AuthTrait;
+    
     public function index(Request $request)
     {
-        $this->authorize();
+        $this->autorisasi();
         
         return view('admin.dashboard', ['siswa' => Siswa::latest()->get()]);
     }
@@ -46,7 +50,7 @@ class SiswaController extends Controller
 
     public function show($id)
     {
-        $this->authorize();
+        $this->autorisasi();
         
         $siswa = Siswa::find($id);
         
@@ -66,15 +70,39 @@ class SiswaController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function diterima(Request $request, $id)
     {
-        $this->authorize();
+        $this->autorisasi();
         
         $siswa = Siswa::find($id);
         $siswa->diterima = true;
         $siswa->save();
         
+        $pengaturan = Pengaturan::select('nama_sekolah', 'alamat_sekolah', 'telepon_sekolah', 'email_sekolah')->first();
+        
+        //kirim notifikasi email jika checkbox dicentang
+        if($request->kirimEmail) {
+          $siswa->notify(new SiswaDiterima($siswa, $pengaturan)
+          );
+        }
+        
         return redirect()->route('admin.dashboard')->with('msg', 'Siswa telah diterima dan notifikasi email telah dikirim!');
+    }
+    
+    public function tidakDiterima(Request $request, $id)
+    {
+        $siswa = Siswa::find($id);
+        $pengaturan = Pengaturan::first();
+        
+        //kirim notifikasi email jika checkbox dicentang
+        if($request->kirimEmail) {
+          $siswa->notify(new SiswaTidakDiterima($siswa, $pengaturan));
+        }
+        
+        unlink('./storage/foto/' . $siswa->foto);
+        $siswa->delete();
+        
+        return redirect()->to('/admin/dashboard')->with('msg', 'Siswa telah ditolak dan terhapus dari daftar siswa');
     }
 
     public function destroy($id)

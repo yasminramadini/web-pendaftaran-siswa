@@ -20,6 +20,8 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', [PageController::class, 'index']);
 Route::get('/form-daftar', [PageController::class, 'formDaftar'])->name('form-daftar');
+Route::put('/siswa/diterima/{id}', [SiswaController::class, 'diterima'])->name('siswaDiterima')->middleware(['auth', 'admin']);
+Route::put('/siswa/tidak-diterima/{id}', [SiswaController::class, 'tidakDiterima'])->name('siswaTidakDiterima')->middleware(['auth', 'admin']);
 Route::resource('/siswa', SiswaController::class);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

@@ -40,7 +40,7 @@
       </tr>
     </table>
     @if(!$siswa->diterima)
-    <form method="post" action="{{ route('siswa.update', ['siswa' => $siswa->id]) }}">
+    <form method="post" action="{{ route('siswaDiterima', ['id' => $siswa->id]) }}">
       @csrf
       @method('PUT')
       <x-button color="#fff" background="#008AFF"><i class="fas fa-check-circle"></i> Terima</x-buttoncolor>
@@ -52,12 +52,14 @@
       @endif
     </form>
     @endif
-    <form class="mt-4">
+    <form class="mt-4" method="post" action="{{ route('siswaTidakDiterima', ['id' => $siswa->id]) }}">
+      @csrf
+      @method('PUT')
       <x-button color="#fff" background="#E20020"><i class="fas fa-ban"></i> Tolak</x-buttoncolor>
       @if($siswa->email)
       <div class="mt-2">
-        <input type="checkbox" class="form-check-input" name="kirimEmail" id="kirimEmail">
-        <label for="kirimEmail" class="form-check-label">Kirim email pemberitahuan</label>
+        <input type="checkbox" class="form-check-input" name="kirimEmail" id="kirimEmail2">
+        <label for="kirimEmail2" class="form-check-label">Kirim email pemberitahuan</label>
       </div>
       @endif
     </form>

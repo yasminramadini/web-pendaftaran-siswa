@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Gate;
 
 //ini adalah trait untuk mengecek autorisasi user
 
-class AuthTrait {
-  public function authorize()
+trait AuthTrait {
+  public function autorisasi()
   {
       if(!Gate::allows('admin')) {
         abort(403);
