@@ -16,10 +16,10 @@
     <x-alert type="info">Tidak ada data</x-alert>
     @endif
     
-    <form class="my-3">
+    <form class="my-3" action="{{ route('admin.dashboard') }}" method="post">
       @csrf
       <div class="input-group">
-        <input type="search" name="keyword" class="form-control" placeholder="Cari siswa..." required>
+        <input type="search" name="keyword" class="form-control" placeholder="Cari siswa...">
         <x-button color="#fff" background="#008AFF"><i class="fas fa-search"></i></x-buttoncolor>
       </div>
     </form>
@@ -49,9 +49,16 @@
               @endif
             </td>
             <td>
-              <a href="{{ route('siswa.show', ['siswa' => $s->id]) }}" style="background: #008AFF; color: #fff" class="btn">
+              <div class="btn-group">
+                <a href="{{ route('siswa.show', ['siswa' => $s->id]) }}" style="background: #008AFF; color: #fff" class="btn">
                 Detail <i class="fas fa-angle-right"></i>
-              </a>
+                </a>
+                <form method="post" action="{{ route('siswa.destroy', ['siswa' => $s->id]) }}">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                </form>
+              </div>
             </td>
           </tr>
           @endforeach

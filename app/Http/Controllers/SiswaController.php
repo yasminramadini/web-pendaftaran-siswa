@@ -14,11 +14,18 @@ class SiswaController extends Controller
 {
     use AuthTrait;
     
-    public function index(Request $request)
+    public function index($nama = null, Request $request)
     {
         $this->autorisasi();
         
-        return view('admin.dashboard', ['siswa' => Siswa::latest()->get()]);
+        //jika melakukan pencarian
+        if($request->keyword !== null) {
+          $siswa = Siswa::where('nama', 'like', '%' . $request->keyword . '%')->get();
+        } else {
+          $siswa = Siswa::latest()->get();
+        }
+        
+        return view('admin.dashboard', ['siswa' => $siswa]);
     }
 
     public function store(SiswaRequest $request)
@@ -65,11 +72,6 @@ class SiswaController extends Controller
         return view('admin.detailSiswa', ['siswa' => $siswa]);
     }
 
-    public function edit($id)
-    {
-        //
-    }
-
     public function diterima(Request $request, $id)
     {
         $this->autorisasi();
@@ -91,6 +93,8 @@ class SiswaController extends Controller
     
     public function tidakDiterima(Request $request, $id)
     {
+        $this->autorisasi();
+        
         $siswa = Siswa::find($id);
         $pengaturan = Pengaturan::first();
         
@@ -107,6 +111,12 @@ class SiswaController extends Controller
 
     public function destroy($id)
     {
-        //
+        $this->autorisasi();
+        
+        $siswa = Siswa::find($id);
+        unlink('./storage/foto' . $siswa->foto);
+        $siswa->delete();
+        
+        return redirect()->to('/admin/dashboard')->with('msg', 'Siswa berhasil dihapus');
     }
 }

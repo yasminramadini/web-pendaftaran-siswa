@@ -29,7 +29,7 @@ Route::post('/login/store', [AuthController::class, 'storeLogin'])->name('login.
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function() {
-  Route::get('/dashboard', [SiswaController::class, 'index'])->name('admin.dashboard');
+  Route::match(['get', 'post'], '/dashboard/{nama?}', [SiswaController::class, 'index'])->name('admin.dashboard');
   
   Route::get('/pengaturan/edit-visi', [PengaturanController::class, 'editVisi'])->name('pengaturan.edit-visi');
   Route::put('/pengaturan/update-visi', [PengaturanController::class, 'updateVisi'])->name('pengaturan.update-visi');
