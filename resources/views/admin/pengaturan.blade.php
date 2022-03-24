@@ -96,7 +96,7 @@
         <label>Tentang sekolah</label>
         <textarea class="form-control" name="tentang_sekolah" rows="7">{{ $pengaturan->tentang_sekolah }}</textarea>
       </div>
-      <x-button message="Simpan" background="#008AFF" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
+      <x-button message="Simpan" background="{{ $pengaturan->tema }}" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
     </form>
 </div>
 </div>

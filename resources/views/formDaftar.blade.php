@@ -98,7 +98,7 @@
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
-      <x-button color="#fff" background="#008AFF">Submit</x-buttoncolor>
+      <x-button color="#fff" background="{{ $pengaturan->tema }}">Submit</x-buttoncolor>
     </form>
   </div>
 </div>

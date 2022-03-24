@@ -43,7 +43,7 @@
     <form method="post" action="{{ route('siswaDiterima', ['id' => $siswa->id]) }}">
       @csrf
       @method('PUT')
-      <x-button color="#fff" background="#008AFF"><i class="fas fa-check-circle"></i> Terima</x-buttoncolor>
+      <x-button color="#fff" background="{{ $pengaturan->tema }}"><i class="fas fa-check-circle"></i> Terima</x-buttoncolor>
       @if($siswa->email)
       <div class="mt-2">
         <input type="checkbox" class="form-check-input" name="kirimEmail" id="kirimEmail">

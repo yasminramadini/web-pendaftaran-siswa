@@ -16,7 +16,7 @@
         <button class="btn btn-danger" type="button" onclick="hapusMisi(this.parentElement)"><i class="fas fa-ban"></i></button>
       </div>
       @endforeach
-      <x-button message="Simpan" background="#008AFF" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
+      <x-button message="Simpan" background="{{ $pengaturan->tema }}" color="#fff"><i class="fas fa-save"></i> Simpan</x-button>
     </form>
   </div>
 </div>

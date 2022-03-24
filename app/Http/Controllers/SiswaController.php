@@ -69,7 +69,7 @@ class SiswaController extends Controller
         $waktuAkhir = Carbon::now();
         $siswa['umur'] = $waktuAwal->locale('id_ID')->diffInYears($waktuAkhir);
         
-        return view('admin.detailSiswa', ['siswa' => $siswa]);
+        return view('admin.detailSiswa', ['siswa' => $siswa, 'pengaturan' => Pengaturan::select('tema')->first()]);
     }
 
     public function diterima(Request $request, $id)
@@ -114,7 +114,7 @@ class SiswaController extends Controller
         $this->autorisasi();
         
         $siswa = Siswa::find($id);
-        unlink('./storage/foto' . $siswa->foto);
+        unlink('./storage/foto/' . $siswa->foto);
         $siswa->delete();
         
         return redirect()->to('/admin/dashboard')->with('msg', 'Siswa berhasil dihapus');
