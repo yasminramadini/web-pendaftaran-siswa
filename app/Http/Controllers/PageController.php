@@ -19,6 +19,6 @@ class PageController extends Controller
     
     public function formDaftar()
     {
-        return view('formDaftar', ['pengaturan' => Pengaturan::select('nama_sekolah')->first()]);
+        return view('formDaftar', ['pengaturan' => Pengaturan::select('nama_sekolah', 'tema')->first()]);
     }
 }

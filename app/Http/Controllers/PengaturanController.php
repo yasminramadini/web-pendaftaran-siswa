@@ -62,7 +62,7 @@ class PengaturanController extends Controller
         
         $pengaturan->nama_sekolah = $request->nama_sekolah;
         $pengaturan->alamat_sekolah = $request->alamat_sekolah;
-        $pengaturan->telepon_sekolah = $pengaturan->telepon_sekolah;
+        $pengaturan->telepon_sekolah = $request->telepon_sekolah;
         $pengaturan->email_sekolah = $request->email_sekolah;
         $pengaturan->tema = $request->tema;
         $pengaturan->logo = $namaLogo;
@@ -70,7 +70,7 @@ class PengaturanController extends Controller
         $pengaturan->visi = $visi;
         $pengaturan->misi = $misi;
         $pengaturan->tentang_sekolah = $request->tentang_sekolah;
-        $pengaturan->fasilitas = $request->fasilitas;
+        $pengaturan->fasilitas = $fasilitas;
         $pengaturan->save();
         
         return redirect()->to('/admin/pengaturan')->with('msg', 'Pengaturan berhasil diterapkan');
